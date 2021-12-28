@@ -11,7 +11,6 @@ def main(argv):
     table_list = []
     for i in range(num):
         table_list.append("T" + str(i))
-    print(table_list)
     for i in range(num):
         for j in range(i + 1, num):
             if random.random() > 0.5:
