@@ -28,7 +28,7 @@ def main(argv):
         in_degree[dst] += 1
         if src in dep_graph:
             dep_graph[src].append(dst)
-    print(dep_graph)
+    # print(dep_graph)
 
     table_limit = 2
     stage_num = 0
@@ -53,7 +53,7 @@ def main(argv):
             del dep_graph[mem_table]
         print(curr_list)
         stage_num += 1
-    print("total number of stages is:", stage_num)
+    print("maximum stage number (0 based) is :", stage_num - 1)
 
 if __name__ == '__main__':
     main(sys.argv)
