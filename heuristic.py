@@ -1,5 +1,5 @@
 import sys
-
+table_limit = 2
 def main(argv):
     if len(argv) != 3:
         print("Usage: python3 " + argv[0] + " <input filename> <total num of tables>")
@@ -28,21 +28,21 @@ def main(argv):
         in_degree[dst] += 1
         if src in dep_graph:
             dep_graph[src].append(dst)
-    # print(dep_graph)
+    #print(dep_graph)
 
-    table_limit = 2
     stage_num = 0
     # allocation (assume there is no limit of tables available per stage)
-    while(len(dep_graph) != 0):
+    while(len(table_list) != 0):
         curr_list = []
-        for t in dep_graph:
+        for i in range(len(table_list) - 1, -1, -1):
+            t = table_list[i]
             if in_degree[t] == 0 and len(dep_graph[t]) > 0:
                 curr_list.append(t)
                 if len(curr_list) == table_limit:
                     break
         # Fill in other positions
         if len(curr_list) < table_limit:
-            for t in dep_graph:
+            for i in range(len(table_list) - 1, -1, -1):
                 if in_degree[t] == 0 and t not in curr_list:
                     curr_list.append(t)
                 if len(curr_list) == table_limit:
@@ -50,7 +50,7 @@ def main(argv):
         for mem_table in curr_list:
             for following_tb in dep_graph[mem_table]:
                 in_degree[following_tb] -= 1
-            del dep_graph[mem_table]
+            table_list.remove(mem_table)
         print(curr_list)
         stage_num += 1
     print("maximum stage number (0 based) is :", stage_num - 1)
