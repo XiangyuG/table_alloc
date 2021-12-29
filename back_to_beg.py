@@ -1,6 +1,7 @@
 import sys
 import copy
 
+table_limit_per_stage = 2
 def compare(t1):
     return out_degree_cp[t1]
 
@@ -57,7 +58,6 @@ def main(argv):
     curr_len -= 1
     stage_num = 0
     pos = 0
-    table_limit_per_stage = 2
     # allocation to stages
     while (curr_len >= 0):
         curr_list = []
